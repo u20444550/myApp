@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Restaurants
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<img src= "/assets/images/Home.jpg" />
+
+
+
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let restaurant of restaurants">
+      <ion-avatar slot="start">
+        <img [src]="restaurant.image" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ restaurant.name }}</h2>
+        <p >Type: {{ restaurant.dishType }}</p>
+        <p>Rating: {{ restaurant.rating }}/5  Price: {{ restaurant.price }} $</p>
+        <p>Top dish: {{ restaurant.topdish }}</p>
+
+
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

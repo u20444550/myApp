@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="cartItems.length === 0" class="empty-cart">
+  <p>Cart is empty.</p>
+</div>
+
+<ng-container *ngIf="cartItems.length > 0">
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">cart</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-list>
+      <ion-item *ngFor="let item of cartItems">
+        <ion-avatar slot="start">
+          <img [src]="item.restaurant.image" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ item.restaurant.name }}</h2>
+          <p>Type: {{ item.restaurant.dishType }}</p>
+          <p>Price: {{ item.restaurant.price }} $</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Total price: {{ item.totalPrice }} $</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  
+    
+    <ion-item>
+      <ion-label>Standard delivery fee:</ion-label>
+      <ion-note slot="end">2 $</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Grand total:</ion-label>
+      <ion-note slot="end">{{ grandTotal + 2 }} $</ion-note>
+    </ion-item>
+  
+    <ion-button expand="block" color="success" (click)="makePayment()">
+      Make Payment
+    </ion-button>
+  
+    <ion-button expand="block" color="danger" (click)="clearCart()">
+      Clear Cart
+    </ion-button>
+  </ion-content>
+  
+    
+  
+  
+  
+
+</ng-container>
+
+
+
+
+
+
