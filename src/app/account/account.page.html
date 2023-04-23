@@ -1,13 +1,59 @@
-<ion-header [translucent]="true">
+<!-- account.page.html -->
+<ion-header>
   <ion-toolbar>
     <ion-title>Account</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">account</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<ion-content>
+   <!-- Customer Details -->
+   <div class="customer-details">
+    <h2>Customer Details
+      <ion-button (click)="openEditForm()" size="small">Edit</ion-button>
+    </h2>
+    <p class="customer-details-text"> <strong>Name:</strong>  {{ accountDetails.name }}</p>
+    <p class="customer-details-text"><strong>Email:</strong>  {{ accountDetails.email }}</p>
+    <p class="customer-details-text"><strong>Phone:</strong>  {{ accountDetails.phone }}</p>
+    <!-- Add other fields as needed -->
+  </div>
+
+  <!-- Manage Addresses Button -->
+  <ion-item lines="none">
+    <ion-icon name="home" slot="start"></ion-icon>
+    <ion-label>
+      <h3>Manage Addresses</h3>
+      <p>Add, edit, or delete your shipping addresses</p>
+    </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+
+
+
+
+  <!-- Past Delivered Orders -->
+<div class="order-history">
+  <h2>Order History</h2>
+  <ion-list>
+    <ion-item *ngFor="let order of orderHistory">
+      <ion-label>
+        <h3>Order ID: {{order.id}}</h3>
+        <p>Date: {{order.date | date}}</p>
+        <p>Total: {{order.grandTotal}} $</p>
+        <h4>Items:</h4>
+        <ion-list>
+          <ion-item *ngFor="let item of order.items">
+            <ion-label class="order-item">{{item.restaurant.topdish}}</ion-label>
+            <ion-label class="order-quantity">x  {{item.quantity}}</ion-label>
+            
+          </ion-item>
+        </ion-list>
+      </ion-label>
+      <ion-button (click)="reorder(order)">Reorder</ion-button>
+    </ion-item>
+  </ion-list>
+</div>
+
+
+  <!-- Get Help Button -->
+  <ion-button expand="block" (click)="openHelpModal()">Get Help</ion-button>
+

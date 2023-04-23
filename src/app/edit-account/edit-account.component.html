@@ -1,0 +1,37 @@
+<!-- edit-account.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">Back</ion-button>
+    </ion-buttons>
+    <ion-title>Edit Account Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="editAccountForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <div *ngIf="editAccountForm.get('name')?.invalid && editAccountForm.get('name')?.touched">
+      <p class="error-text">Name is required.</p>
+    </div>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <div *ngIf="editAccountForm.get('email')?.invalid && editAccountForm.get('email')?.touched">
+      <p class="error-text">Please enter a valid email.</p>
+    </div>
+    <ion-item>
+      <ion-label>Phone</ion-label>
+      <ion-input formControlName="phone"></ion-input>
+    </ion-item>
+    <div *ngIf="editAccountForm.get('phone')?.invalid && editAccountForm.get('phone')?.touched">
+      <p class="error-text">Phone number is required.</p>
+    </div>
+    <!-- Add other fields as needed -->
+    <ion-button type="submit" [disabled]="editAccountForm.invalid">Save Changes</ion-button>
+  </form>
+</ion-content>

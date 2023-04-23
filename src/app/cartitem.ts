@@ -12,6 +12,7 @@ export class CartItem {
     };
     quantity: number;
     totalPrice: number;
+
   
     constructor(restaurant: any) {
       this.restaurant = restaurant;

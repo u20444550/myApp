@@ -18,7 +18,7 @@ export class RestaurantService {
           distanceToHome: 2.5,
           distanceToSchool: 3.0,
           price: 5.5,
-          topdish : 'Quad stacker meal',
+          topdish : 'Quad stacker',
           image: 'assets/images/burgerking.png', 
         },
         {

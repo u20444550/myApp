@@ -5,7 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { CartService } from '../services/cart.service';
 import { CartItem } from '../cartitem';
 import { AlertController } from '@ionic/angular';
-
+import { Order } from '../order';
+import { OrderHistoryService } from '../services/orderhistory.service';
 
 
 @Component({
@@ -18,10 +19,15 @@ import { AlertController } from '@ionic/angular';
 export class CartPage implements OnInit {
   cartItems: CartItem[] = [];
   grandTotal: number = 0;
-  
 
-  
-  constructor(private cartService: CartService, private alertController: AlertController) { }
+
+
+  constructor(
+    private cartService: CartService,
+    private alertController: AlertController,
+    private orderHistoryService: OrderHistoryService
+
+  ) { }
 
   ngOnInit() {
     this.initializeCart();
@@ -41,7 +47,7 @@ export class CartPage implements OnInit {
     this.initializeCart();
     this.grandTotal = 0;
     this.cartService.clearGrandTotal();
- 
+
   }
 
   updateGrandTotal() {
@@ -55,10 +61,19 @@ export class CartPage implements OnInit {
       message: `Your payment of ${this.grandTotal + 2} $ has been made`,
       buttons: ['OK']
     });
-  
+
     await alert.present();
+    const newOrder: Order = {
+      id: Date.now(),
+      items: this.cartItems,
+      grandTotal: this.grandTotal +2,
+      date: new Date(),
+    };
+    this.orderHistoryService.addToOrderHistory(newOrder);
+    this.clearCart();
   }
-  
- 
+
+
+
 
 }
