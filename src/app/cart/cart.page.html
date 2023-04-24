@@ -30,8 +30,12 @@
         </ion-label>
       </ion-item>
     </ion-list>
-  
-    
+
+    <ion-item>
+      <ion-label position="stacked">Delivery instructions:</ion-label>
+      <ion-textarea [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+
     <ion-item>
       <ion-label>Standard delivery fee:</ion-label>
       <ion-note slot="end">2 $</ion-note>
@@ -40,25 +44,13 @@
       <ion-label>Grand total:</ion-label>
       <ion-note slot="end">{{ grandTotal + 2 }} $</ion-note>
     </ion-item>
-  
+
     <ion-button expand="block" color="success" (click)="makePayment()">
       Make Payment
     </ion-button>
-  
+
     <ion-button expand="block" color="danger" (click)="clearCart()">
       Clear Cart
     </ion-button>
   </ion-content>
-  
-    
-  
-  
-  
-
 </ng-container>
-
-
-
-
-
-

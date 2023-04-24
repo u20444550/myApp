@@ -8,7 +8,6 @@ import { AlertController } from '@ionic/angular';
 import { Order } from '../order';
 import { OrderHistoryService } from '../services/orderhistory.service';
 
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -19,14 +18,12 @@ import { OrderHistoryService } from '../services/orderhistory.service';
 export class CartPage implements OnInit {
   cartItems: CartItem[] = [];
   grandTotal: number = 0;
-
-
+  description: string = '';
 
   constructor(
     private cartService: CartService,
     private alertController: AlertController,
     private orderHistoryService: OrderHistoryService
-
   ) { }
 
   ngOnInit() {
@@ -47,13 +44,11 @@ export class CartPage implements OnInit {
     this.initializeCart();
     this.grandTotal = 0;
     this.cartService.clearGrandTotal();
-
   }
 
   updateGrandTotal() {
     this.grandTotal = this.cartService.getGrandTotal();
   }
-
 
   async makePayment() {
     const alert = await this.alertController.create({
@@ -63,17 +58,14 @@ export class CartPage implements OnInit {
     });
 
     await alert.present();
-    const newOrder: Order = {
-      id: Date.now(),
-      items: this.cartItems,
-      grandTotal: this.grandTotal +2,
-      date: new Date(),
-    };
+    const newOrder = new Order(
+      Date.now(),
+      this.cartItems,
+      this.grandTotal + 2,
+      this.description === '' ? 'standard' : this.description,
+      new Date()
+    );
     this.orderHistoryService.addToOrderHistory(newOrder);
     this.clearCart();
   }
-
-
-
-
 }

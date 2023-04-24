@@ -39,6 +39,8 @@
         <h3>Order ID: {{order.id}}</h3>
         <p>Date: {{order.date | date}}</p>
         <p>Total: {{order.grandTotal}} $</p>
+        <p>Delivery: {{order.description}}</p>
+        <br>
         <h4>Items:</h4>
         <ion-list>
           <ion-item *ngFor="let item of order.items">

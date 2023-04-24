@@ -1,5 +1,3 @@
-// account.page.ts
-
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../order';
 import { OrderHistoryService } from '../services/orderhistory.service';
@@ -51,8 +49,13 @@ export class AccountPage implements OnInit {
 
   async openEditForm() {
     const editFormModal = await this.modalController.create({
-      component: EditAccountComponent // Add EditAccountComponent here
+      component: EditAccountComponent
     });
+    
+    editFormModal.onDidDismiss().then(() => {
+      this.accountDetails = JSON.parse(localStorage.getItem('accountDetails') || '{}');
+    });
+
     return await editFormModal.present();
   }
 }
